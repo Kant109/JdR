@@ -1,0 +1,24 @@
+[
+  {
+    "id": "root",
+    "title": "Campagne: Brise-Écume",
+    "content": "Incroyable",
+    "children": [
+      {
+        "id": "chapter-1",
+        "title": "Chapitre 1: L'Appel des Flots",
+        "content": "<p>Les personnages se rencontrent...</p>",
+        "children": [],
+        "expanded": true
+      },
+      {
+        "id": "91fd1e4b-593a-44cb-b735-9c5e6ab99f94",
+        "title": "Étape 2",
+        "content": "Ici il peut y avoir ça",
+        "children": [],
+        "expanded": true
+      }
+    ],
+    "expanded": false
+  }
+]

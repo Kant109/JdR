@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "name": "Coucou toi",
+    "archetype": "Chevalier Déchu",
+    "description": "Un ancien noble cherchant la rédemption sur les côtes de Brise-Écume. Son épée est aussi lourde que son passé.",
+    "image": "/images/character_knight.png",
+    "stats": {
+      "str": 16,
+      "dex": 10,
+      "int": 12
+    }
+  },
+  {
+    "id": "2",
+    "name": "Elara des Marées",
+    "archetype": "Mage de l'Eau",
+    "description": "Elle entend la voix de l'océan et manipule les courants. Ses pouvoirs sont liés aux phases de la lune.",
+    "image": "/images/character_mage.png",
+    "stats": {
+      "str": 8,
+      "dex": 14,
+      "int": 18
+    }
+  },
+  {
+    "id": "3",
+    "name": "Kaelen l'Ombre",
+    "archetype": "Voleur des Quais",
+    "description": "Il connaît chaque ruelle sombre de la ville. Rapide et silencieux, il préfère l'or à la gloire.",
+    "image": "/images/character_rogue.png",
+    "stats": {
+      "str": 10,
+      "dex": 18,
+      "int": 14
+    }
+  },
+  {
+    "id": "4",
+    "name": "Luthier",
+    "archetype": "Barde Voyageur",
+    "description": "Sa musique peut apaiser les bêtes sauvages ou inciter à la révolte. Il cherche la chanson ultime.",
+    "image": "/images/character_bard.png",
+    "stats": {
+      "str": 10,
+      "dex": 16,
+      "int": 16
+    }
+  },
+  {
+    "id": "5",
+    "name": "Frère Orian",
+    "archetype": "Clerc du Sel",
+    "description": "Dévoué au dieu de la mer, il soigne les marins et bénit les navires avant leur départ.",
+    "image": "/uploads/48f3cc44-90d6-4a3e-bf3c-172ade6131e5.jpeg",
+    "stats": {
+      "str": 14,
+      "dex": 10,
+      "int": 16
+    }
+  }
+]
