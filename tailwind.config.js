@@ -20,6 +20,8 @@ module.exports = {
                 'aria-glow': '#818CF8', // Lighter glow
                 'aria-parchment': '#F5E6D3', // Keep for legacy/contrast
                 'aria-brown': '#4A3B2A',
+                'aria-blue': '#1B3B5F', // Deep muted blue
+                'aria-sea': '#2C7A7B', // Teal/Sea green
             },
             fontFamily: {
                 'cinzel': ['Cinzel', 'serif'],

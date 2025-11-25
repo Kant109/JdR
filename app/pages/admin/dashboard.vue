@@ -33,6 +33,19 @@
           <span class="font-cinzel font-bold tracking-widest uppercase text-sm relative z-10">Grimoire</span>
           <div v-if="activeTab === 'scenario'" class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-aria-glow rounded-l-full shadow-[0_0_10px_#818CF8]"></div>
         </button>
+
+        <button 
+          @click="activeTab = 'lore'"
+          class="w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group relative overflow-hidden border"
+          :class="activeTab === 'lore' 
+            ? 'bg-gradient-to-r from-aria-mystic/20 to-transparent border-aria-mystic/50 text-aria-glow shadow-[0_0_15px_rgba(99,102,241,0.3)]' 
+            : 'border-transparent text-gray-500 hover:text-gray-200 hover:bg-white/5 hover:border-white/10'"
+        >
+          <div class="absolute inset-0 bg-aria-mystic/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out pointer-events-none"></div>
+          <span class="text-2xl relative z-10 group-hover:scale-110 transition-transform duration-300">📚</span>
+          <span class="font-cinzel font-bold tracking-widest uppercase text-sm relative z-10">Lore</span>
+          <div v-if="activeTab === 'lore'" class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-aria-glow rounded-l-full shadow-[0_0_10px_#818CF8]"></div>
+        </button>
       </nav>
 
       <div class="p-4 border-t border-aria-obsidian bg-black/20 space-y-2">
@@ -127,6 +140,55 @@
             </div>
           </div>
         </div>
+
+
+        <!-- Lore Tab -->
+        <div v-if="activeTab === 'lore'" class="h-full flex flex-col">
+          <header class="px-8 py-6 flex justify-between items-center border-b border-aria-obsidian/50 bg-aria-midnight/30 backdrop-blur-sm">
+            <div>
+              <h2 class="text-3xl font-cinzel text-aria-gold drop-shadow-md">Archives de Brise-Écume</h2>
+              <p class="text-gray-400 text-sm mt-1">Gérez l'histoire et les légendes</p>
+            </div>
+            <button 
+              @click="addLoreSection" 
+              class="bg-gradient-to-r from-green-700 to-green-600 text-white px-6 py-2 rounded-lg shadow-lg shadow-green-900/50 hover:shadow-green-500/30 hover:scale-105 transition-all font-bold border border-green-500/30 flex items-center gap-2"
+            >
+              <span>✨</span> Nouvelle Section
+            </button>
+          </header>
+
+          <div class="flex-grow overflow-y-auto p-8 space-y-8">
+            <div v-for="section in lore" :key="section.id" class="bg-aria-midnight/50 border border-aria-obsidian rounded-xl p-6 shadow-xl relative group">
+              <button 
+                @click="deleteLoreSection(section.id)" 
+                class="absolute top-4 right-4 text-red-400/50 hover:text-red-400 hover:bg-red-900/20 p-2 rounded transition-all opacity-0 group-hover:opacity-100"
+                title="Supprimer la section"
+              >
+                🗑️
+              </button>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-aria-gold text-sm font-bold mb-2">Titre</label>
+                  <input 
+                    v-model="section.title" 
+                    type="text" 
+                    class="w-full bg-black/30 border border-aria-obsidian rounded p-2 text-xl font-cinzel text-gray-200 focus:border-aria-gold focus:outline-none transition-colors"
+                  />
+                </div>
+                
+                <div>
+                  <label class="block text-aria-gold text-sm font-bold mb-2">Contenu (HTML supporté)</label>
+                  <textarea 
+                    v-model="section.content" 
+                    rows="6"
+                    class="w-full bg-black/30 border border-aria-obsidian rounded p-2 font-mono text-sm text-gray-300 focus:border-aria-gold focus:outline-none transition-colors"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Footer Actions -->
@@ -156,8 +218,9 @@ import { v4 as uuidv4 } from 'uuid'
 const router = useRouter()
 const { data: characters, pending: charsPending } = await useFetch('/api/characters')
 const { data: scenario, pending: scenPending } = await useFetch('/api/scenario')
+const { data: lore, pending: lorePending } = await useFetch('/api/lore')
 
-const pending = computed(() => charsPending.value || scenPending.value)
+const pending = computed(() => charsPending.value || scenPending.value || lorePending.value)
 
 // Ensure all characters have IDs for stable rendering
 watch(characters, (newChars) => {
@@ -179,6 +242,15 @@ watch(scenario, (newScenario) => {
       })
     }
     initNodes(newScenario)
+  }
+}, { immediate: true })
+
+// Ensure all lore sections have IDs
+watch(lore, (newLore) => {
+  if (newLore) {
+    newLore.forEach(section => {
+      if (!section.id) section.id = uuidv4()
+    })
   }
 }, { immediate: true })
 
@@ -277,6 +349,22 @@ const collapseAll = () => {
   setExpandRecursive(scenario.value, false)
 }
 
+// --- Lore Logic ---
+const addLoreSection = () => {
+  lore.value.push({
+    id: uuidv4(),
+    title: 'Nouvelle Section',
+    content: '<p>Contenu ici...</p>'
+  })
+}
+
+const deleteLoreSection = async (id) => {
+  if (confirm('Supprimer cette section ?')) {
+    lore.value = lore.value.filter(l => l.id !== id)
+    await saveChanges()
+  }
+}
+
 // --- Global Logic ---
 const saveChanges = async () => {
   saving.value = true
@@ -285,7 +373,8 @@ const saveChanges = async () => {
   try {
     await Promise.all([
       $fetch('/api/characters', { method: 'PUT', body: characters.value }),
-      $fetch('/api/scenario', { method: 'PUT', body: scenario.value })
+      $fetch('/api/scenario', { method: 'PUT', body: scenario.value }),
+      $fetch('/api/lore', { method: 'PUT', body: lore.value })
     ])
     saveMessage.value = 'Sauvegardé avec succès !'
     setTimeout(() => { saveMessage.value = '' }, 3000)
@@ -313,6 +402,10 @@ onMounted(() => {
 
 useHead({
   title: 'Aria: Admin Dashboard'
+})
+
+definePageMeta({
+  layout: false
 })
 </script>
 

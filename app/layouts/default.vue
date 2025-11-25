@@ -1,6 +1,8 @@
 <template>
   <div class="min-h-screen flex flex-col font-body bg-aria-parchment text-aria-brown">
 
+    <Header />
+
     <main class="flex-grow">
       <slot />
     </main>

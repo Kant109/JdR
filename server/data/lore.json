@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "title": "Le Port des Oubliés",
+    "content": "Brise-Écume n'est pas une ville comme les autres. Située à la lisière du Royaume d'Aria, elle sert de dernier refuge avant l'immensité de l'Océan des Tempêtes. Ses murs de pierre blanche, blanchis par le sel, ont résisté à des siècles d'assauts, tant par les pirates que par les créatures des profondeurs."
+  },
+  {
+    "id": "2",
+    "title": "Légendes Locales",
+    "content": "<ul class=\"list-disc list-inside space-y-2 ml-4\"><li><strong>Le Phare Éteint :</strong> On raconte que la flamme du vieux phare ne s'éteint jamais vraiment, mais qu'elle brille parfois d'une lueur verte annonciatrice de malheur.</li><li><strong>La Grotte aux Murmures :</strong> À marée basse, les grottes sous les falaises chantent une mélodie qui peut rendre fou celui qui l'écoute trop longtemps.</li><li><strong>Le Marché Flottant :</strong> Une fois par lune, des navires venus de contrées lointaines (et peut-être d'autres mondes) accostent pour vendre des objets introuvables ailleurs.</li></ul>"
+  },
+  {
+    "id": "3",
+    "title": "Politique et Factions",
+    "content": "<p>La ville est dirigée par un conseil de marchands, mais le véritable pouvoir réside peut-être dans les mains de la Guilde des Dockers ou du Culte de la Marée. Les tensions sont palpables, et chaque étranger est vu à la fois comme une opportunité et une menace.</p>"
+  }
+]

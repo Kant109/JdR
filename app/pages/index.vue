@@ -16,23 +16,7 @@
           "Là où les vagues murmurent des secrets..."
         </p>
         
-        <!-- Central Navigation -->
-        <nav class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12">
-          <NuxtLink to="/characters" class="group relative overflow-hidden bg-black/50 hover:bg-aria-gold/20 border-2 border-aria-gold px-8 py-4 rounded transition-all duration-300 w-64">
-            <span class="block text-2xl font-cinzel font-bold text-aria-gold group-hover:text-white transition-colors">Les Héros</span>
-            <span class="text-sm text-aria-parchment opacity-80 group-hover:opacity-100">Découvrir les protagonistes</span>
-          </NuxtLink>
-          
-          <NuxtLink to="/lore" class="group relative overflow-hidden bg-black/50 hover:bg-aria-gold/20 border-2 border-aria-gold px-8 py-4 rounded transition-all duration-300 w-64">
-            <span class="block text-2xl font-cinzel font-bold text-aria-gold group-hover:text-white transition-colors">Le Lore</span>
-            <span class="text-sm text-aria-parchment opacity-80 group-hover:opacity-100">Carte et Histoire</span>
-          </NuxtLink>
-          
-          <NuxtLink to="/admin" class="group relative overflow-hidden bg-black/50 hover:bg-aria-gold/20 border-2 border-aria-gold px-8 py-4 rounded transition-all duration-300 w-64">
-            <span class="block text-2xl font-cinzel font-bold text-aria-gold group-hover:text-white transition-colors">Maître du Jeu</span>
-            <span class="text-sm text-aria-parchment opacity-80 group-hover:opacity-100">Accès Restreint</span>
-          </NuxtLink>
-        </nav>
+
       </div>
     </section>
 

@@ -11,29 +11,13 @@
 
       <!-- Lore Text -->
       <div class="space-y-6 text-lg leading-relaxed">
-        <div class="bg-white/50 p-6 rounded-lg border border-aria-gold shadow-sm">
-          <h2 class="text-3xl font-cinzel text-aria-dark-gold mb-4">Le Port des Oubliés</h2>
-          <p>
-            Brise-Écume n'est pas une ville comme les autres. Située à la lisière du Royaume d'Aria, elle sert de dernier refuge avant l'immensité de l'Océan des Tempêtes. 
-            Ses murs de pierre blanche, blanchis par le sel, ont résisté à des siècles d'assauts, tant par les pirates que par les créatures des profondeurs.
-          </p>
+        <div v-if="pending" class="text-center text-aria-gold animate-pulse">
+          Chargement des archives...
         </div>
-
-        <div class="bg-white/50 p-6 rounded-lg border border-aria-gold shadow-sm">
-          <h2 class="text-3xl font-cinzel text-aria-dark-gold mb-4">Légendes Locales</h2>
-          <ul class="list-disc list-inside space-y-2 ml-4">
-            <li><strong>Le Phare Éteint :</strong> On raconte que la flamme du vieux phare ne s'éteint jamais vraiment, mais qu'elle brille parfois d'une lueur verte annonciatrice de malheur.</li>
-            <li><strong>La Grotte aux Murmures :</strong> À marée basse, les grottes sous les falaises chantent une mélodie qui peut rendre fou celui qui l'écoute trop longtemps.</li>
-            <li><strong>Le Marché Flottant :</strong> Une fois par lune, des navires venus de contrées lointaines (et peut-être d'autres mondes) accostent pour vendre des objets introuvables ailleurs.</li>
-          </ul>
-        </div>
-
-        <div class="bg-white/50 p-6 rounded-lg border border-aria-gold shadow-sm">
-          <h2 class="text-3xl font-cinzel text-aria-dark-gold mb-4">Politique et Factions</h2>
-          <p>
-            La ville est dirigée par un conseil de marchands, mais le véritable pouvoir réside peut-être dans les mains de la Guilde des Dockers ou du Culte de la Marée. 
-            Les tensions sont palpables, et chaque étranger est vu à la fois comme une opportunité et une menace.
-          </p>
+        
+        <div v-else v-for="section in lore" :key="section.id" class="bg-white/50 p-6 rounded-lg border border-aria-gold shadow-sm">
+          <h2 class="text-3xl font-cinzel text-aria-dark-gold mb-4">{{ section.title }}</h2>
+          <div v-html="section.content" class="prose prose-p:text-aria-brown prose-strong:text-aria-brown"></div>
         </div>
       </div>
     </div>
@@ -41,6 +25,8 @@
 </template>
 
 <script setup>
+const { data: lore, pending } = await useFetch('/api/lore')
+
 useHead({
   title: 'Aria: Brise-Écume - Lore'
 })
